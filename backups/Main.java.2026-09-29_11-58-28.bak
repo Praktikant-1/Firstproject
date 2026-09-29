@@ -1,0 +1,43 @@
+import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame fenster = new JFrame("Eingabefenster");
+        fenster.setSize(400, 300);
+        fenster.getContentPane().setBackground(Color.GRAY);
+        fenster.setLayout(new GridBagLayout());
+
+        JLabel frage = new JLabel("Bitte gib deine ID ein:",JLabel.CENTER);
+        JTextField eingabeFeld = new JTextField(10);
+        JButton knopf = new JButton("Prüfen");
+        JLabel antwort = new JLabel("", JLabel.CENTER);
+
+        JPanel box = new JPanel(new GridLayout(0, 1, 10, 10));
+        box.setOpaque(false);
+        box.add(frage);
+        box.add(eingabeFeld);
+        box.add(knopf);
+        box.add(antwort);
+        fenster.add(box);
+
+        knopf.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(eingabeFeld.getText());
+                if (id != 27799) {
+                    antwort.setText("Zugang verweigert!");
+                } else {
+                    antwort.setText("Zugang gewährt ;)");
+                }
+            } catch (NumberFormatException ex) {
+                antwort.setText("Bitte nur Zahlen eingeben!");
+            }
+        });
+
+        fenster.setVisible(true);
+    }
+}
